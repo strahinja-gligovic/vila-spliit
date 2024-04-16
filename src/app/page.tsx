@@ -24,7 +24,7 @@ export default function HomePage() {
           Jednako kao što Lisan al Gaib hrabro korača kroz avanture, ova aplikacija hrabro prolazi kroz izazove troškova mladih ratnika, nudeći im štit u borbi protiv finansijskih nevolja. Svojom mudrošću, Lisan Deoba osigurava da momci iz Vile Kamenjarke nastave svoj put ka epskim podvizima, neopterećeni brizganjem zlatnika.          </p>
           <div className="flex gap-2">
             <Button asChild>
-              <Link href="/groups/CuCEvILvwIjfEDuooMm6j/expenses">Vila Deoba</Link>
+              <Link href="/groups/qzuw_oG7NS-2yqRiNwAZg/expenses">Vila Deoba</Link>
             </Button>
             <Button asChild variant="secondary">
               <Link target="_blank" href="https://vila-kirija.duckdns.org">

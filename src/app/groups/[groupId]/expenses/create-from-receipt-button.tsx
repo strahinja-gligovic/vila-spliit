@@ -153,7 +153,7 @@ export function CreateFromReceiptButton({
                 <Loader2 className="w-8 h-8 animate-spin" />
               ) : receiptInfo ? (
                 <div className="absolute top-2 left-2 bottom-2 right-2">
-                  <Image
+                  <img
                     src={receiptInfo.url}
                     width={receiptInfo.width}
                     height={receiptInfo.height}

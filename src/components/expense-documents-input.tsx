@@ -141,7 +141,7 @@ export function DocumentThumbnail({
           variant="secondary"
           className="w-full h-full border overflow-hidden rounded shadow-inner"
         >
-          <Image
+          <img
             width={300}
             height={300}
             className="object-contain"
@@ -184,7 +184,7 @@ export function DocumentThumbnail({
             <CarouselContent>
               {documents.map((document, index) => (
                 <CarouselItem key={index}>
-                  <Image
+                  <img
                     className="object-contain w-[calc(100vw-32px)] h-[calc(100dvh-32px-40px-16px-48px)] sm:w-[calc(100vw-32px-32px)] sm:h-[calc(100dvh-32px-40px-16px-32px-48px)]"
                     src={document.url}
                     width={document.width}
