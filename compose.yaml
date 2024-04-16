@@ -1,10 +1,26 @@
 services:
   app:
-    build: .
+    build: 
+      context: .
     ports:
       - 3000:3000
-    env_file:
-      - container.env
+    environment:
+      POSTGRES_PRISMA_URL: ${POSTGRES_PRISMA_URL}
+      POSTGRES_URL_NON_POOLING: ${POSTGRES_URL_NON_POOLING}
+      NEXT_PUBLIC_ENABLE_EXPENSE_DOCUMENTS: ${NEXT_PUBLIC_ENABLE_EXPENSE_DOCUMENTS}
+      S3_UPLOAD_KEY: ${S3_UPLOAD_KEY}
+      S3_UPLOAD_SECRET: ${S3_UPLOAD_SECRET}
+      S3_UPLOAD_BUCKET: ${S3_UPLOAD_BUCKET}
+      S3_UPLOAD_REGION: ${S3_UPLOAD_REGION}
+      S3_UPLOAD_ENDPOINT: ${S3_UPLOAD_ENDPOINT}
+      NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT: ${NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT: ${NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT}
+      NEXT_PUBLIC_WHITELISTED_EMAILS: ${NEXT_PUBLIC_WHITELISTED_EMAILS}
+      GOOGLE_ID: ${GOOGLE_ID}
+      GOOGLE_SECRET: ${GOOGLE_SECRET}
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_TRUST_HOST: ${AUTH_TRUST_HOST}
     depends_on:
       db:
         condition: service_healthy
@@ -13,8 +29,9 @@ services:
     image: postgres:latest
     ports:
       - 5432:5432
-    env_file:
-      - container.env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     healthcheck:
