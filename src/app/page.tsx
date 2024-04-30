@@ -22,7 +22,7 @@ export default async function HomePage() {
             Gaiba, koji kroz život korača sa odlučnošću i hrabrošću.
           </p>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            Ova epska aplikacija, nazvana "Lisan Deoba", osvaja srca mladih
+            Ova epska aplikacija, nazvana Lisan Deoba, osvaja srca mladih
             ratnika koji dele krov pod kojim odraštaju. Svojom moćnom magijom,
             omogućava im da se zajednički suoče s najvećim izazovom -
             finansijskim troškovima.{' '}
@@ -43,7 +43,7 @@ export default async function HomePage() {
           </p>
           <div className="flex gap-2">
             <Button asChild>
-              <Link href="/groups/CuCEvILvwIjfEDuooMm6j/expenses">
+              <Link href="/groups/qzuw_oG7NS-2yqRiNwAZg/expenses">
                 Vila Deoba
               </Link>
             </Button>
