@@ -22,3 +22,13 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  backup:
+    image: ghcr.io/realorangeone/db-auto-backup:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/c/Users/strah/OneDrive/Documents/vila-spliit:/var/backups
+    environment:
+      - SUCCESS_HOOK_URL=https://hc-ping.com/350ead85-5cda-431a-88ca-fb58cd224f30
+      - INCLUDE_LOGS=true
