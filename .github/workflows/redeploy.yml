@@ -20,7 +20,7 @@ jobs:
           do
             # Simulating a status check (replace this URL with your actual status check URL)
             status=$(curl -s "${{ secrets.RESOLVER_URL }}/status" | jq -r '.status')
-            echo "Current status: $status"
+            echo "$status"
             
             # Check if the process is complete
             if [[ "$status" == "complete" ]]; then
