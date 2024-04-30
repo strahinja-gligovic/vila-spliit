@@ -12,22 +12,27 @@ app.post('/webhook', (req, res) => {
 
     const process = exec('powershell.exe C:\\vila-spliit-backup\\RunRebuilder.ps1');
 
+    let logs;
     process.on('error', (err) => {
         console.error(`Exec error: ${err}`);
         res.status(500).send('Script failed');
     });
 
     process.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
+        const log = `stdout: ${data}`
+        console.log(log);
+        logs += '\n' + log;
     });
 
     process.stderr.on('data', (data) => {
-        console.error(`stderr: ${data}`);
+        const log = `stderr: ${data}`
+        console.log(log);
+        logs += '\n' + log;
     });
 
     process.on('close', (code) => {
         console.log(`child process exited with code ${code}`);
-        res.send('Script executed');
+        res.send(`Script executed \n ${logs}`);
     });
 });
 
