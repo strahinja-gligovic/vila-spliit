@@ -8,12 +8,11 @@ const port = 5734; // You can use any port that is free on your system
 app.use(bodyParser.json());
 
 let logs;
-let complete = false;
-
+let process;
 app.post('/webhook', (req, res) => {
     console.log('Webhook received!');
 
-    const process = exec('powershell.exe C:\\vila-spliit-backup\\RunRebuilder.ps1');
+    process = exec('powershell.exe C:\\vila-spliit-backup\\RunRebuilder.ps1');
 
     process.on('error', (err) => {
         console.error(`Exec error: ${err}`);
@@ -21,31 +20,28 @@ app.post('/webhook', (req, res) => {
     });
 
     process.stdout.on('data', (data) => {
-        const log = `stdout: ${data}`
-        console.log(log);
-        logs += '\n' + log;
+        console.log(data);
+        logs += '\n' + data;
     });
 
     process.stderr.on('data', (data) => {
-        const log = `stderr: ${data}`
-        console.log(log);
-        logs += '\n' + log;
+        console.log(data);
+        logs += '\n' + data;
     });
 
     process.on('close', (code) => {
         console.log(`child process exited with code ${code}`);
-        res.send(`Script executed \n ${logs}`);
-        complete = true;
     });
+
+    return res.send('redeploy started')
 });
 
 app.get('/status', (req, res) => {
-    if (complete) {
-        res.send('complete');
-        complete = false;
-        return;
+    console.log('reporting status');
+    if (process?.exitCode !== null) {
+        return res.send({ status: 'complete' });
     }
-    res.send(logs ?? 'empty');
+    res.send({ status: logs ?? 'empty' });
     logs = '';
 })
 

@@ -14,7 +14,7 @@ jobs:
           curl -X POST ${{ secrets.RESOLVER_URL }}/webhook -H "Content-Type: application/json" -d '{}'
       - name: Poll for updates
         run: |
-          max_attempts=60  # Set a maximum number of attempts to avoid infinite loop
+          max_attempts=100  # Set a maximum number of attempts to avoid infinite loop
           attempt=1
           while [ $attempt -le $max_attempts ]
           do
@@ -29,7 +29,7 @@ jobs:
             fi
 
             # Sleep for a specified time before the next poll (e.g., 30 seconds)
-            sleep 10
+            sleep 3
             ((attempt++))
           done
           if [ $attempt -gt $max_attempts ]; then
