@@ -29,12 +29,6 @@ app.post('/webhook', (req, res) => {
         console.log(`child process exited with code ${code}`);
         res.send('Script executed');
     });
-
-    // Set a timeout for the script execution
-    setTimeout(() => {
-        process.kill(); // This will terminate the script if it's still running
-        res.status(408).send('Script execution timeout');
-    }, 120000); 
 });
 
 app.listen(port, () => {
