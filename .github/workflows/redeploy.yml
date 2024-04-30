@@ -11,4 +11,27 @@ jobs:
     steps:
       - name: Trigger Local Script
         run: |
-          curl -X POST ${{ secrets.WEBHOOK_URL }} -H "Content-Type: application/json" -d '{}'
+          curl -X POST ${{ secrets.RESOLVER_URL }}/webhook -H "Content-Type: application/json" -d '{}'
+      - name: Poll for updates
+        run: |
+          max_attempts=60  # Set a maximum number of attempts to avoid infinite loop
+          attempt=1
+          while [ $attempt -le $max_attempts ]
+          do
+            # Simulating a status check (replace this URL with your actual status check URL)
+            status=$(curl -s "${{ secrets.RESOLVER_URL }}/status" | jq -r '.status')
+            echo "Current status: $status"
+            
+            # Check if the process is complete
+            if [[ "$status" == "complete" ]]; then
+              echo "Process completed successfully."
+              break
+            fi
+
+            # Sleep for a specified time before the next poll (e.g., 30 seconds)
+            sleep 10
+            ((attempt++))
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "Max attempts reached without completion."
+          fi
